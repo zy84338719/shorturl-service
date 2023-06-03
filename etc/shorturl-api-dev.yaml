@@ -1,0 +1,11 @@
+Name: shorturl-api
+Host: 0.0.0.0
+Port: 18888
+
+mysql:
+  dataSource: root:123456@@tcp(wwww.baidu.com:3307)/short?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+redis:
+  Host: wwww.baidu.com:6379
+  Pass: 2321213
+short:
+  domain: https://d.murphyyi.com
