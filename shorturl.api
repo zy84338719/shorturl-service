@@ -1,0 +1,50 @@
+type getShortRequest {
+	Code string `path:"code"`
+}
+
+type createRequest {
+	DataType          string `json:"dataType,options=url|data"`
+	ProhibitEffective bool   `json:"prohibitEffective,optional"`
+	Data              string `json:"data"`
+	ExprieInMinutes   int64  `json:"expireInMinutes,optional"` // -1 表示永久
+	ExprieTime        string `json:"exprieTime,optional"`      // ExprieTime 存在ExprieInMinutes 不生效
+	CreateBy          string `json:"createBy,optional"`
+}
+
+type updateRequest {
+	Code      string `json:"code"`
+	ShortCode string `json:"shortCode,optional"`
+	createRequest
+	Status int `json:"status,options=1|2|3"` // 1 正常 2 禁用 3 删除
+}
+
+type getListRequest {
+	Page      int    `form:"page"`
+	PageSize  int    `form:"pageSize"`
+	CreateBy  string `form:"createBy,optional"`
+	DataType  string `form:"dataType,options=url|data"`
+	Permanent bool   `form:"permanent,optional"`
+	ShortCode string `form:"shortCode,optional"`
+}
+
+type Response {
+	Code int64       `json:"code"`
+	Msg  string      `json:"msg"`
+	Data interface{} `json:"data"`
+}
+@server(
+	prefix: shorturl
+	group: shorturl
+)
+service shorturl-api {
+	@handler getShorturl
+	get /getUrl/:code (getShortRequest) returns (Response)
+	@handler create
+	post /create (createRequest) returns (Response)
+	@handler update
+	post /update (updateRequest) returns (Response)
+	@handler getList
+	get /getList (getListRequest) returns (Response)
+	@handler getData
+	get /getData/:code (getShortRequest) returns (Response)
+}
