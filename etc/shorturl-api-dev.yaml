@@ -1,0 +1,23 @@
+Name: shorturl-api
+Host: 0.0.0.0
+Port: 18888
+mysql:
+  enable: true
+  prefix: ""
+  port: "3306"
+  config: charset=utf8mb4&parseTime=True&loc=Local
+  db-name: shorturl
+  username: root
+  password: 1234567
+  path: www.baidu.com
+  engine: ""
+  log-mode: error
+  max-idle-conns: 10
+  max-open-conns: 100
+  singular: false
+  log-zap: false
+redis:
+  enable: true
+  addr: www.baidu.com:16379
+  password: 1
+  db: 0
